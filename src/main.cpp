@@ -22,7 +22,7 @@ int sc_main(int argc, char *argv[])
 {
     using namespace nana;
     vector<string> instruction_queue;
-    int nadd,nmul,nls;
+    int nadd,nmul,nls,buffer;
     nadd = 3;
     nmul = nls = 2;
     std::vector<int> sizes;
@@ -90,6 +90,15 @@ int sc_main(int argc, char *argv[])
             nadd = add.value();
             nmul = mul.value();
             nls = sl.value();
+        }
+    });
+    sub->append("Número de Buffers para BPB",[&](menu::item_proxy ip)
+    {
+        inputbox ibox(fm,"","Quantidade de Buffers");
+        inputbox::integer buff("Buffer",buffer,1,10,1);
+        if(ibox.show_modal(buff))
+        {
+            buffer = buff.value();
         }
     });
     // Menu de ajuste dos tempos de latencia na interface
